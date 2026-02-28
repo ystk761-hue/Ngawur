@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Bercanda Digital - Neon Cyber Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #050505;
+      color: white;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Animated Grid Background */
+    body::before {
+      content: "";
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    /* Neon Glow Orbs */
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 0, 255, 0.3);
+      top: -100px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      background: rgba(0, 255, 255, 0.3);
+      bottom: -50px;
+      right: -50px;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+    }
+
+    /* Glitch Effect */
+    .glitch {
+      position: relative;
+      display: inline-block;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff00ff;
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 #00ffff;
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim2 5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+      0% { clip: rect(12px, 9999px, 52px, 0); }
+      20% { clip: rect(65px, 9999px, 11px, 0); }
+      40% { clip: rect(26px, 9999px, 89px, 0); }
+      60% { clip: rect(82px, 9999px, 33px, 0); }
+      80% { clip: rect(44px, 9999px, 66px, 0); }
+      100% { clip: rect(19px, 9999px, 77px, 0); }
+    }
+
+    @keyframes glitch-anim2 {
+      0% { clip: rect(65px, 9999px, 99px, 0); }
+      20% { clip: rect(12px, 9999px, 44px, 0); }
+      40% { clip: rect(88px, 9999px, 22px, 0); }
+      60% { clip: rect(33px, 9999px, 77px, 0); }
+      80% { clip: rect(55px, 9999px, 11px, 0); }
+      100% { clip: rect(22px, 9999px, 88px, 0); }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 8%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+      font-size: 24px;
+      letter-spacing: 2px;
+      animation: flicker 3s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+      52% { opacity: 0.3; }
+      54% { opacity: 1; }
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 50px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      background: linear-gradient(135deg, #ff00ff, #ff1493);
+      color: white;
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 30px rgba(255, 0, 255, 0.6), inset 0 0 30px rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #00ffff;
+      color: #00ffff;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+
+    .btn-outline:hover {
+      background: rgba(0, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
+      border-color: #00ffff;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 8% 80px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin-bottom: 25px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .hero .highlight-pink {
+      color: #ff00ff;
+      text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+      display: inline-block;
+    }
+
+    .hero .highlight-cyan {
+      color: #00ffff;
+      text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+      display: inline-block;
+    }
+
+    .hero p {
+      color: #b0b0b0;
+      margin-bottom: 40px;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .services {
+      padding: 80px 8%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(15, 15, 15, 0.8);
+      padding: 40px 30px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 0, 255, 0.3);
+      box-shadow: 0 0 30px rgba(255, 0, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
+      transform: rotate(45deg);
+      transition: 0.5s;
+      opacity: 0;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+      animation: shine 0.5s ease-in-out;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3);
+      border-color: rgba(0, 255, 255, 0.5);
+    }
+
+    .card:nth-child(2) {
+      border-color: rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+    }
+
+    .card:nth-child(2):hover {
+      box-shadow: 0 20px 40px rgba(255, 0, 255, 0.3);
+      border-color: rgba(255, 0, 255, 0.5);
+    }
+
+    .card:nth-child(3) {
+      border-color: rgba(138, 43, 226, 0.3);
+      box-shadow: 0 0 30px rgba(138, 43, 226, 0.1);
+    }
+
+    .card:nth-child(3):hover {
+      box-shadow: 0 20px 40px rgba(138, 43, 226, 0.4);
+    }
+
+    .icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+      filter: drop-shadow(0 0 10px currentColor);
+    }
+
+    .card:nth-child(1) .icon { color: #00ffff; }
+    .card:nth-child(2) .icon { color: #ff00ff; }
+    .card:nth-child(3) .icon { color: #8a2be2; }
+
+    .card h3 {
+      margin-bottom: 15px;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+    }
+
+    .card p {
+      color: #aaa;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 100px 8%;
+      position: relative;
+    }
+
+    .cta h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: #00ffff;
+      text-shadow: 0 0 20px #00ffff;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      color: #888;
+      margin: 20px 0 40px;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #555;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0a0a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(#ff00ff, #00ffff);
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 5%;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .hero {
+        padding: 60px 5% 50px;
+      }
+
+      .services {
+        padding: 60px 5%;
+        grid-template-columns: 1fr;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+
+    /* Loading Animation */
+    .fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <!-- Background Elements -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <header class="fade-in">
+    <div class="logo glitch" data-text="Bercanda Digital">Bercanda Digital</div>
+    <button class="btn">Gas Project 🚀</button>
+  </header>
+
+  <section class="hero">
+    <h1 class="fade-in delay-1">
+      Agency <span class="highlight-pink glitch" data-text="Ngakak">Ngakak</span> Tapi<br>
+      <span class="highlight-cyan glitch" data-text="Nggak Ngaco">Nggak Ngaco</span>
+    </h1>
+    <p class="fade-in delay-2">
+      Kita bercanda di chat. Tapi waktu deadline, kita berubah jadi mode turbo ⚡
+    </p>
+    <div class="hero-buttons fade-in delay-3">
+      <button class="btn">Liat Portfolio</button>
+      <button class="btn btn-outline">Ngobrol Dulu</button>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="card fade-in delay-1">
+      <span class="icon">&lt;/&gt;</span>
+      <h3>Website Development</h3>
+      <p>Website lo nggak cuma keren. Tapi juga nggak lemot kayak wifi tetangga. Speed 100/100 guaranteed.</p>
+    </div>
+    <div class="card fade-in delay-2">
+      <span class="icon">✦</span>
+      <h3>Branding</h3>
+      <p>Bikin brand lo keliatan mahal tanpa harus jual ginjal. Visual identity yang bikin competitor iri.</p>
+    </div>
+    <div class="card fade-in delay-3">
+      <span class="icon">🚀</span>
+      <h3>Digital Strategy</h3>
+      <p>Kita bantu growth dengan data-driven approach. Bukan cuma janji "insya viral" tapi real metrics.</p>
+    </div>
+  </section>
+
+  <section class="cta fade-in">
+    <h2>Siap Bercanda Bareng?</h2>
+    <p>Tenang. Kita nggak gigit. Kecuali deadline yang kelewat 😈</p>
+    <button class="btn" style="padding: 16px 40px; font-size: 16px;">
+      Mulai Sekarang →
+    </button>
+  </section>
+
+  <footer>
+    <p>© <span id="year">2026</span> Bercanda Digital. All jokes reserved. | Made with 💜 & ⚡</p>
+  </footer>
+
+  <script>
+    // Dynamic Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.card, .cta').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s ease-out';
+      observer.observe(el);
+    });
+
+    // Mouse trail effect
+    let mouseX = 0, mouseY = 0;
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      const orbs = document.querySelectorAll('.glow-orb');
+      orbs.forEach((orb, index) => {
+        const speed = (index + 1) * 0.02;
+        const x = (mouseX - window.innerWidth / 2) * speed;
+        const y = (mouseY - window.innerHeight / 2) * speed;
+        orb.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+  </script>
+</body>
+</html>
